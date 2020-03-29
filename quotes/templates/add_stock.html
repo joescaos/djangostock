@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="text-center">Add Stocks</h1>
+<form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Add Stock to Portfolio" name="ticker"
+        aria-label="Stock Quote">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Stock</button>
+</form>
+<table class="table table-bordered table-hover my-5">
+    <thead class=" thead-dark">
+        <tr>
+            <th scope="col">Company Name</th>
+            <th scope="col">Stock Price</th>
+            <th scope="col">Previous Close</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">YTD Change</th>
+            <th scope="col">52wk High</th>
+            <th scope="col">52wk low</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if ticker %}
+        {% for list_item in output %}
+        <tr>
+            <th scope="row">{{ list_item.companyName }}</th>
+            <td>${{ list_item.latestPrice  }} </td>
+            <td>${{ list_item.previousClose }} </td>
+            <td>${{ list_item.marketCap }} </td>
+            <td>{{ list_item.ytdChange }} </td>
+            <td>${{ list_item.week52High }} </td>
+            <td>${{ list_item.week52Low }} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

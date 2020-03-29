@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if ticker%}
+
+<div class="list-group mt-3">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active bg-secondary">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Delete Stock</h5>
+        </div>
+        {% for item in ticker %}
+        <a href="{% url 'delete' item.id %}" class="list-group-item list-group-item-action my-3">{{ item }}</a>
+        {% endfor %}
+</div>
+
+</div>
+{% else %}
+You don't have Stocks to delete
+
+{% endif %}
+
+{% endblock %}
